@@ -1,85 +1,197 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Job Management API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Project Description
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+The Job Management API is a RESTful API developed using NestJS and MongoDB, designed to manage employers, job vacancies, and workers. The API supports standard CRUD operations and includes additional features such as job archiving and changing the employer for a worker.
 
-## Description
+## Requirements
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **Node.js**: Version 14 or higher
+- **MongoDB**: Connection to a MongoDB database
 
-## Project setup
+## Setting Up the Project
+
+### Cloning the Repository
 
 ```bash
-$ npm install
+git clone <repository_URL>
+cd job-management
 ```
 
-## Compile and run the project
+## Installing Dependencies
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
 ```
+## Configuring the Environment
 
-## Run tests
+1. Create a .env file based on .env.example:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+cp .env.example .env
 ```
 
-## Resources
+2. Edit the .env file and fill in the necessary environment variables:
 
-Check out a few resources that may come in handy when working with NestJS:
+```bash
+PORT=3000
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+DATABASE_URL=mongodb://username:password@host:port/database
+```
 
-## Support
+## Running the Project
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+npm run start:dev
+```
 
-## Stay in touch
+## Development Mode
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+npm run build
+npm run start
+```
 
-## License
+## Implemented Custom Endpoints
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+### 1. Archive Job
+
+- **URL:** `/jobs/:id/archive`
+- **Description:** Changes the job status to `archived`.
+- **Request Method:** `PUT`
+- **Request Body:** None
+- **Example Response:**
+
+    ```json
+    {
+      "_id": "60d5f9f4e1d2c00c8c8e5c21",
+      "name": "Software Engineer",
+      "status": "archived",
+      "salary": 5000,
+      "workers": ["60d5f9e4e1d2c00c8c8e5c20"],
+      "owner": "60d5f9d4e1d2c00c8c8e5c19",
+      "deleted_at": null,
+      "createdAt": "2023-07-19T12:00:00.000Z",
+      "updatedAt": "2024-04-01T15:30:00.000Z",
+      "__v": 0
+    }
+    ```
+
+### 2. Change Worker Employer
+
+- **URL:** `/workers/:id/new-employer`
+- **Description:** Changes the employer of a worker and adds a record to the hiring history.
+- **Request Method:** `PUT`
+- **Request Body:**
+
+    ```json
+    {
+      "employerId": "60d5f9d4e1d2c00c8c8e5c19",
+      "operation": "hire" // or "fire"
+    }
+    ```
+
+- **Example Response:**
+
+    ```json
+    {
+      "_id": "60d5f9f4e1d2c00c8c8e5c21",
+      "name": "John Doe",
+      "salary": 3000,
+      "owner": "60d5f9d4e1d2c00c8c8e5c19",
+      "job": "60d5f9e4e1d2c00c8c8e5c20",
+      "history": [
+        {
+          "event": "HIRED",
+          "date": "2024-04-01T15:30:00.000Z",
+          "job": "60d5f9e4e1d2c00c8c8e5c20"
+        }
+      ],
+      "deleted_at": null,
+      "createdAt": "2023-07-19T12:00:00.000Z",
+      "updatedAt": "2024-04-01T15:30:00.000Z",
+      "__v": 1
+    }
+    ```
+
+### 3. Search Jobs by Date Range
+
+- **URL:** `/jobs/date-period`
+- **Description:** Returns a list of jobs created within the specified date range.
+- **Request Method:** `GET`
+- **Request Parameters:**
+  - `startDate` (string, required) – start date in ISO format
+  - `endDate` (string, required) – end date in ISO format
+- **Example Response:**
+
+    ```json
+    [
+      {
+        "_id": "60d5f9f4e1d2c00c8c8e5c21",
+        "name": "Software Engineer",
+        "status": "active",
+        "salary": 5000,
+        "workers": ["60d5f9e4e1d2c00c8c8e5c20"],
+        "owner": "60d5f9d4e1d2c00c8c8e5c19",
+        "deleted_at": null,
+        "createdAt": "2023-07-19T12:00:00.000Z",
+        "updatedAt": "2024-04-01T15:30:00.000Z",
+        "__v": 0
+      }
+    ]
+    ```
+
+### 4. Get Matched Jobs for a Worker
+
+- **URL:** `/workers/:id/matched-jobs`
+- **Description:** Returns a list of jobs where the salary is greater than or equal to the worker's salary, and the job status is `open` or `pending`.
+- **Request Method:** `GET`
+- **Request Body:** None
+- **Example Response:**
+
+    ```json
+    [
+      {
+        "_id": "60d5f9f4e1d2c00c8c8e5c22",
+        "name": "Senior Developer",
+        "status": "active",
+        "salary": 7000,
+        "workers": [],
+        "owner": "60d5f9d4e1d2c00c8c8e5c19",
+        "deleted_at": null,
+        "createdAt": "2023-08-01T12:00:00.000Z",
+        "updatedAt": "2024-04-01T15:30:00.000Z",
+        "__v": 0
+      }
+    ]
+    ```
+
+    ### 5. Find Workers by Employer ID
+
+- **URL:** `/employers/:id/workers`
+- **Description:** Returns a list of worker names associated with a specific employer.
+- **Request Method:** `GET`
+- **Example Response:**
+
+    ```json
+    {
+      "workers": [
+        "John Doe",
+        "Jane Smith"
+      ]
+    }
+    ```
+
+- **Error Response (if Employer not found):**
+
+    ```json
+    {
+      "statusCode": 404,
+      "message": "Employer not found",
+      "error": "Not Found"
+    }
+    ```
+
+### Additional Error Handling
+
+If the provided ID is not valid or the employer is not found, the method throws a `NotFoundException` with the message "Employer not found".
