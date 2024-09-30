@@ -195,3 +195,13 @@ npm run start
 ### Additional Error Handling
 
 If the provided ID is not valid or the employer is not found, the method throws a `NotFoundException` with the message "Employer not found".
+
+## Author
+
+- Kovalov Vladyslav
+
+## Contact
+
+- tg: https://t.me/vlad54703
+- mail: vlad.kovalov2000@gmai.com
+- linkedin: https://www.linkedin.com/in/vlad-kovalyov/
